@@ -3,6 +3,10 @@ import os
 from dotenv import load_dotenv
 import random
 from keep_alive import keep_alive
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix=';')
+
 
 sad = ['sad', 'Sad', 'Suicide', 'upset', 'pain', 'suicide']
 randoms = ['Yes', 'No', 'Why', 'Okay', 'Sure', 'Here', 'Now', 'Later']
@@ -59,7 +63,7 @@ async def on_message(message):
 
     if msg.startswith(prefix + 'help'):
         await msgsend(
-            ";Hello: says hello \n;rick: can\'t tell you. \n;buymeaxbox: no \n;random: Pick from a random list of words \n;yes: no \n;no: yes \n;A10: You can guess \n;E: E"
+            ";Hello: says hello \n;rick: can\'t tell you. \n;buymeaxbox: no \n;random: Pick from a random list of words \n;yes: no \n;no: yes \n;A10: brrrt \n;E: E \n;info: Shows bot info"
         )
 
     if msg.startswith(prefix + 'A10'):
@@ -69,7 +73,7 @@ async def on_message(message):
       await msgsend('EA Sports')
 
     if msg.startswith(prefix + 'info'):
-      await msgsend('Developed by Alex Doss & Sam Honkanen')
+      await msgsend('Developed by Alex Doss & Samuel Honkanen')
     
     if msg.startswith(prefix + '9Adm1n'):
       await msgsend('This is an admin tool, bot is working correctly.')
@@ -77,8 +81,29 @@ async def on_message(message):
     if any(word in msg for word in sad):
       await msgsend("It'll be alright, you're time is short.")
 
+@bot.command()
+async def play(ctx, url_: str):
+  voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Lobby')
+  voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+  if not voice.is_connected():
+    await voiceChannel.connect()
+
+@bot.command()
+async def leave(ctx):
+  voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+  if voice.is_connected():
+    await voice.disconnect
+  else:
+     await ctx.send("Already disconnected.")
+
+@bot.command()
+async def pause(ctx):
+  voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+  if voice.is_playing():
+    voice.pause()
+  else:
+    await ctx.send("Already paused.")
   
     
-
 keep_alive()
 client.run(my_secret)
