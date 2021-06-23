@@ -59,7 +59,7 @@ async def on_message(message):
 
     if msg.startswith(prefix + 'help'):
         await msgsend(
-            ";Hello: says hello \n;rick: can\'t tell you. \n;buymeaxbox: no \n;random: Pick from a random list of words \n;yes: no \n;no: yes \n;A10: You can guess \n;E: E"
+            ";Hello: says hello \n;rick: can\'t tell you. \n;buymeaxbox: no \n;random: Pick from a random list of words \n;yes: no \n;no: yes \n;A10: brrrt \n;E: E \n;info: Shows bot info"
         )
 
     if msg.startswith(prefix + 'A10'):
@@ -69,7 +69,7 @@ async def on_message(message):
       await msgsend('EA Sports')
 
     if msg.startswith(prefix + 'info'):
-      await msgsend('Developed by Alex Doss & Sam Honkanen')
+      await msgsend('Developed by Alex Doss & Samuel Honkanen')
     
     if msg.startswith(prefix + '9Adm1n'):
       await msgsend('This is an admin tool, bot is working correctly.')
